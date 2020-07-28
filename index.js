@@ -12,6 +12,8 @@ const PORT = 5000;
 // Sending and requesting data through REST API using bodyParser
 app.use(bodyParser.json());
 
+app.use('/users',userRoutes);
+
 //Creating the route
 app.get('/', (req, res) => {
     console.log("[TEST]")
