@@ -16,13 +16,14 @@ app.use('/users',userRoutes);
 
 //Creating the route
 app.get('/', (req, res) => {
-    console.log("[TEST]")
+    console.log("[TEST]!")
 
-    res.send("Hello, welcome to RESTAPI using NODEjs and Express")
+    res.send("Creation of RESTAPI using NODEjs and Express")
 })
 
 
 //To listen for the request from the RESTAPI side
+
 app.listen(PORT, () => console.log(`Server running in this port: http://localhost:${PORT}`));
 
 
