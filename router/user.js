@@ -4,8 +4,8 @@ import {v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
 
-
-const users = []
+// Using the POST request the users get's updated
+let users = []
 
 // all routes over here are starting with /users for '/'
 router.get('/', (req ,res ) =>{
@@ -18,6 +18,14 @@ router.get('/', (req ,res ) =>{
 router.post('/', (req, res)=> {
 
     const newUser = req.body;
+
+    // EXAMPLE user
+    // {
+    //     "firstName": "Hitesh Saai",
+    //     "lastName": "Mananchery",
+    //     "age": 25,
+    //     "occupation": "Data Scientist"
+    // }
 
     const newUserWithID = {... newUser, id: uuidv4()};
 
@@ -36,6 +44,43 @@ router.get('/:id', (req, res) => {
 
     const foundUser = users.find((user) => user.id === id);
     res.send(foundUser);
+})
+
+
+router.delete('/:id', (req, res) => {
+    const {id} = req.params;
+    
+    users = users.filter((user) => user.id !== id);
+
+    res.send(`Employee with ${id} was removed from the database`);
+
+})
+
+
+router.patch('/:id', (req, res) => {
+    const {id} = req.params;
+    const {firstName, lastName, age, occupation} = req.body;
+
+    const user = users.find((user) => user.id == id);
+
+    if (firstName) {
+        user.firstName = firstName;
+     };
+
+    if (lastName) {
+        user.lastName = lastName;
+    };
+
+    if (age) {
+        user.age = age;
+    };
+
+    if (occupation) {
+        user.occupation = occupation;
+    };
+
+    res.send(`The employee detail for id ${id} has been updated!`)
+
 })
 
 export default router;
